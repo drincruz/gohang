@@ -6,6 +6,8 @@ import (
 	"time"
 )
 
+const DEFAULT_PORT string = ":5000"
+
 func okTwoHundred(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("{ \"data\": \"200 OK\"}"))
 }
@@ -32,6 +34,6 @@ func main() {
 	mux.HandleFunc("/404", notFound)
 	mux.HandleFunc("/slow", slowResponse)
 
-	log.Println("[INFO] Now listening on :80")
-	http.ListenAndServe(":80", mux)
+	log.Printf("[INFO] Now listening on %s", DEFAULT_PORT)
+	http.ListenAndServe(DEFAULT_PORT, mux)
 }
