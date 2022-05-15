@@ -52,7 +52,10 @@ sys     0m0.006s
 ## Build a Docker container
 
 Did you want to run this in a Docker container?
-Simply run `docker-compose build` and then `docker-compose up`.
+
+This is currently published on Docker Hub and you can `docker run -p 5000:5000 drincruz/gohang:0.2.0`.
+
+If you wanted to build locally, simply run `docker-compose build` and then `docker-compose up`.
 
 ### docker-compose build
 
