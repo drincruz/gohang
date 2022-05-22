@@ -53,7 +53,7 @@ sys     0m0.006s
 
 Did you want to run this in a Docker container?
 
-This is currently published on Github Packages and you can `docker run -p 5000:5000 ghcr.io/drincruz/gohang:main`.
+This is currently published on Github Packages and you can `docker run -p 5000:5000 ghcr.io/drincruz/gohang:latest`.
 
 If you wanted to build locally, simply run `docker-compose build` and then `docker-compose up`.
 
