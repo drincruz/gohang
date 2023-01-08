@@ -1,12 +1,20 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
+	"os"
 	"time"
 )
 
-const DEFAULT_PORT string = ":5000"
+func getDefaultPort() string {
+	port, exists := os.LookupEnv("GOHANG_PORT")
+	if exists {
+		return fmt.Sprintf(":%s", port)
+	}
+	return ":5000"
+}
 
 func writeJsonResponseHeader(w http.ResponseWriter) {
 	w.Header().Set("Content-Type", "application/json")
@@ -42,6 +50,8 @@ func main() {
 	mux.HandleFunc("/404", NotFound)
 	mux.HandleFunc("/slow", SlowResponse)
 
-	log.Printf("[INFO] Now listening on %s", DEFAULT_PORT)
-	http.ListenAndServe(DEFAULT_PORT, mux)
+	port := getDefaultPort()
+
+	log.Printf("[INFO] Now listening on %s", port)
+	http.ListenAndServe(port, mux)
 }

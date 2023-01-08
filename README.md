@@ -1,4 +1,5 @@
 # gohang
+
 A simple HTTP server for testing
 
 ## Build from source
@@ -97,4 +98,19 @@ $ docker-compose up
 Recreating gohang_web_1 ... done
 Attaching to gohang_web_1
 web_1  | 2020/10/04 21:16:09 [INFO] Now listening on :5000
+```
+
+## Running Tests
+
+To run tests, you can just run `go test ./...`
+
+## Optional Port Setting
+
+In the case where you want to have the server run on a different port, you can set the environment variable, `GOHANG_PORT`.
+
+For example, running the following will have the server listen on port 5555.
+
+```bash
+$ GOHANG_PORT=5555 ./gohang
+2023/01/07 21:18:33 [INFO] Now listening on :5555
 ```
