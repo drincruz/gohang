@@ -110,7 +110,15 @@ In the case where you want to have the server run on a different port, you can s
 
 For example, running the following will have the server listen on port 5555.
 
+### Local `go build`
+
 ```bash
 $ GOHANG_PORT=5555 ./gohang
 2023/01/07 21:18:33 [INFO] Now listening on :5555
+```
+
+### Docker Example
+
+```bash
+docker run -e GOHANG_PORT=5555 -p 5555:5555 ghcr.io/drincruz/gohang:latest
 ```
