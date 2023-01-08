@@ -1,10 +1,12 @@
 package main
 
 import (
-	"github.com/stretchr/testify/assert"
+	"fmt"
 	"net/http"
 	"net/http/httptest"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestOkTwoHundredHandler(t *testing.T) {
@@ -28,6 +30,27 @@ func TestOkTwoHundredHandler(t *testing.T) {
 		t.Errorf("handler returned unexpected body: got %v want %v",
 			rr.Body.String(), expected)
 	}
+}
+
+func TestEchoHandler(t *testing.T) {
+	urlParams := "fake=urlparams"
+	req, err := http.NewRequest("GET", fmt.Sprintf("/echo?%s", urlParams), nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	rr := httptest.NewRecorder()
+	handler := http.HandlerFunc(EchoHandler)
+	handler.ServeHTTP(rr, req)
+
+	// Check the status code
+	if status := rr.Code; status != http.StatusOK {
+		t.Errorf("handler returned wrong status code: got %v want %v",
+			status, http.StatusOK)
+	}
+
+	// Check that the returned body contains the params we passed in
+	assert.Contains(t, rr.Body.String(), urlParams)
 }
 
 func TestFiveHundredHandler(t *testing.T) {

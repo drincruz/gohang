@@ -1,9 +1,11 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
+	"net/http/httputil"
 	"os"
 	"time"
 )
@@ -23,6 +25,24 @@ func writeJsonResponseHeader(w http.ResponseWriter) {
 func OkTwoHundred(w http.ResponseWriter, r *http.Request) {
 	writeJsonResponseHeader(w)
 	w.Write([]byte("{ \"data\": \"200 OK\" }"))
+}
+
+func EchoHandler(w http.ResponseWriter, r *http.Request) {
+	writeJsonResponseHeader(w)
+	request, err := httputil.DumpRequest(r, true)
+	if err != nil {
+		log.Fatalf("[EchoHandler] Error happened with DumpRequest. Err: %s", err)
+	}
+	responseMap := make(map[string]string)
+	responseMap["data"] = string(request)
+	response, err := json.Marshal(responseMap)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		log.Fatalf("[EchoHandler] Error happened with JSON marshal. Err: %s", err)
+		w.Write([]byte(fmt.Sprintf("{\"status\": \"error\", \"response\": \"%s\"}", err)))
+		return
+	}
+	w.Write([]byte(response))
 }
 
 func FiveHundred(w http.ResponseWriter, r *http.Request) {
@@ -48,6 +68,7 @@ func main() {
 	mux.HandleFunc("/", OkTwoHundred)
 	mux.HandleFunc("/500", FiveHundred)
 	mux.HandleFunc("/404", NotFound)
+	mux.HandleFunc("/echo", EchoHandler)
 	mux.HandleFunc("/slow", SlowResponse)
 
 	port := getDefaultPort()

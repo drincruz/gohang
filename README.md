@@ -20,6 +20,13 @@ Content-Length: 19
 Content-Type: text/plain; charset=utf-8
 ```
 
+### /echo
+
+```
+$ curl localhost:5000/echo?boots=pants
+{"data":"GET /echo?boots=pants HTTP/1.1\r\nHost: localhost:5555\r\nAccept: */*\r\nUser-Agent: curl/7.79.1\r\n\r\n"}
+```
+
 ### /404
 
 ```
