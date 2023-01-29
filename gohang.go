@@ -15,7 +15,7 @@ func getDefaultPort() string {
 	if exists {
 		return fmt.Sprintf(":%s", port)
 	}
-	return ":5000"
+	return ":5555"
 }
 
 func writeJsonResponseHeader(w http.ResponseWriter) {

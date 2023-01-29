@@ -100,8 +100,8 @@ func TestNotFoundHandler(t *testing.T) {
 }
 
 func TestDefaultPort(t *testing.T) {
-	want := ":5000"
+	want := ":5555"
 	defaultPort := getDefaultPort()
 
-	assert.Equal(t, want, defaultPort, "Default port should be 5000")
+	assert.Equal(t, want, defaultPort, "Default port should be 5555")
 }

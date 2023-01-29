@@ -13,7 +13,7 @@ Run `gohang`
 ### /
 
 ```
-curl -I localhost:5000/
+curl -I localhost:5555/
 HTTP/1.1 200 OK
 Date: Sun, 04 Oct 2020 01:38:03 GMT
 Content-Length: 19
@@ -23,14 +23,14 @@ Content-Type: text/plain; charset=utf-8
 ### /echo
 
 ```
-$ curl localhost:5000/echo?boots=pants
+$ curl localhost:5555/echo?boots=pants
 {"data":"GET /echo?boots=pants HTTP/1.1\r\nHost: localhost:5555\r\nAccept: */*\r\nUser-Agent: curl/7.79.1\r\n\r\n"}
 ```
 
 ### /404
 
 ```
-$ curl -I localhost:5000/404
+$ curl -I localhost:5555/404
 HTTP/1.1 404 Not Found
 Date: Sun, 04 Oct 2020 01:37:17 GMT
 Content-Length: 26
@@ -40,7 +40,7 @@ Content-Type: text/plain; charset=utf-8
 ### /500
 
 ```
-$ curl -I localhost:5000/500
+$ curl -I localhost:5555/500
 HTTP/1.1 500 Internal Server Error
 Date: Sun, 04 Oct 2020 01:34:28 GMT
 Content-Length: 38
@@ -50,7 +50,7 @@ Content-Type: text/plain; charset=utf-8
 ### /slow
 
 ```
-$ time curl localhost:5000/slow
+$ time curl localhost:5555/slow
 { "data": "slow response"}
 real    0m5.023s
 user    0m0.006s
@@ -61,7 +61,7 @@ sys     0m0.006s
 
 Did you want to run this in a Docker container?
 
-This is currently published on Github Packages and you can `docker run -p 5000:5000 ghcr.io/drincruz/gohang:latest`.
+This is currently published on Github Packages and you can `docker run -p 5555:5555 ghcr.io/drincruz/gohang:latest`.
 
 If you wanted to build locally, simply run `docker-compose build` and then `docker-compose up`.
 
@@ -89,7 +89,7 @@ Step 6/7 : ENTRYPOINT /go/src/app/gohang
  ---> Running in 60bbd1397191
 Removing intermediate container 60bbd1397191
  ---> ad4f7bc0dbe0
-Step 7/7 : EXPOSE 5000
+Step 7/7 : EXPOSE 5555
  ---> Running in e56fedc7f4d6
 Removing intermediate container e56fedc7f4d6
  ---> a15ced7b2772
@@ -104,7 +104,7 @@ Successfully tagged gohang_web:latest
 $ docker-compose up
 Recreating gohang_web_1 ... done
 Attaching to gohang_web_1
-web_1  | 2020/10/04 21:16:09 [INFO] Now listening on :5000
+web_1  | 2020/10/04 21:16:09 [INFO] Now listening on :5555
 ```
 
 ## Running Tests
@@ -127,5 +127,5 @@ $ GOHANG_PORT=5555 ./gohang
 ### Docker Example
 
 ```bash
-docker run -e GOHANG_PORT=5555 -p 5555:5555 ghcr.io/drincruz/gohang:latest
+docker run -e GOHANG_PORT=5556 -p 5556:5556 ghcr.io/drincruz/gohang:latest
 ```

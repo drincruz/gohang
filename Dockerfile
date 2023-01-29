@@ -10,4 +10,4 @@ RUN go install .
 
 ENTRYPOINT /go/src/app/gohang
 
-EXPOSE 5000
+EXPOSE 5555
